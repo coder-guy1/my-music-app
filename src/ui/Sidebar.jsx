@@ -1,50 +1,33 @@
-import { useState } from "react";
 import styled from "styled-components";
 import MainNav from "./MainNav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSymfony } from "@fortawesome/free-brands-svg-icons";
 
 const StyledSidebar = styled.aside`
-  background-color: var(--color-grey-200);
-  height: 100vh;
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: ${({ isOpen }) => (isOpen ? "0" : "-250px")};
-  transition: left 0.3s ease-in-out;
-  padding: 1.2rem;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #a2a2a2;
+  padding: 3.2rem 1rem;
+  border-right: 1px solid var(--color-grey-100);
+
+  grid-row: 1 / -1;
+  width: calc(
+    38% - 1px
+  ); /* Set the width to 20% of the screen width, considering the border */
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
 `;
 
-const ToggleButton = styled.button`
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--color-primary-dark);
-  }
+const LogoIcon = styled(FontAwesomeIcon)`
+  color: var(--color-primary); /* Change to your desired color */
+  font-size: 2rem;
 `;
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  };
-
   return (
-    <>
-      <StyledSidebar isOpen={isOpen}>
-        {/* Sidebar Content */}
-        <button onClick={handleToggle}>close</button>
-        <MainNav />
-      </StyledSidebar>
-
-      {/* Toggle Button */}
-      <ToggleButton onClick={handleToggle}>{isOpen ? "" : "☰"}</ToggleButton>
-    </>
+    <StyledSidebar>
+      <LogoIcon icon={faSymfony} />
+      <MainNav />
+    </StyledSidebar>
   );
 };
 
